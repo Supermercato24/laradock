@@ -140,9 +140,18 @@ services:
         - "${NGINX_HOST_EXTRA_PORT1}:8081"
       depends_on:
         - php-fpm
+      extra_hosts:
+        - "dockerhost:${DOCKER_HOST_IP}"
+        - "s24.local:${DOCKER_HOST_IP}"
       networks:
-        - frontend
-        - backend
+        backend:
+          aliases:
+            - s24.local
+            - comm.local
+        frontend:
+          aliases:
+            - s24.local
+            - comm.local
 
 ### Blackfire Container #################################
 
